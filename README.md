@@ -1,4 +1,9 @@
 ## This is an automated backup and recovery exercise in a container
+### members of the group
+- Nkwenti Severian
+- Nyengka Prosper
+- Nathan Joel
+
 To achieve this successfully, you need the following :
 
 - clone this repository
