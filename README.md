@@ -3,7 +3,8 @@
 - Nkwenti Severian
 - Nyengka Prosper
 - Nathan Joel
-> Remember everything in this work requires absolute path
+> Remember everything in this work requires absolute path.\
+
 To achieve this successfully, you need the following :
 
 - clone this repository
@@ -40,7 +41,6 @@ this will take you to the user ubuntu directory\
 
 Good!\
 Next, you need to install a package to clone this repository using this command:
-**Run the command in the directory you want your back_up folder to be found**
 ```
 apt update && apt install git -y && git clone https://github.com/Nkwenti-Severian-Ndongtsop/Automated_Backup_Recovery.git
 ```
@@ -54,7 +54,8 @@ Excellent!
 
 Now cd into the Automated_Backup_Recovery directory\
 run this to make the scripts executable
-```chmod +x back_up.sh && chmod +x recover.sh
+```
+chmod +x back_up.sh && chmod +x recover.sh
 ```
 you can execute the **back_up.sh** and then **recover.sh**\
 You can check the logs after each execution\
