@@ -3,7 +3,7 @@
 - Nkwenti Severian
 - Nyengka Prosper
 - Nathan Joel
-
+> Remember everything in this work requires absolute path
 To achieve this successfully, you need the following :
 
 - clone this repository
@@ -14,8 +14,12 @@ You can install your multipass and run an instance using
 ```sh
 sudo apt update && sudo apt install snapd && sudo snap install multipass && multipass launch docker --name ubuntu
 ```
+if you receive an error message use this command to verify if the instance ubuntu is running:
+```
+multipass list
+```
 
-Now you need to alias **"mulltipass exec ubuntu -- docker"** to **"docker"** in you shell configuration file.\
+Now you need to alias **"mulltipass exec ubuntu -- docker"** to **"docker"** in your shell configuration file(.bashrc or .zshrc.\
 This is to facilitate the execution of commands in your instance without loggin into it, even if the instance is started or not.
 
 You now run the command
@@ -28,19 +32,33 @@ Now you run an ubuntu image, that provide you an interactive bash environment us
 ```
 sudo docker run -it --name container ubuntu bash
 ```
+now you run:
+```
+cd home/ubuntu/
+```
+this will take you to the user ubuntu directory\
 
 Good!\
-Next, you need to install a packages to clone this repository using this command:
+Next, you need to install a package to clone this repository using this command:
 **Run the command in the directory you want your back_up folder to be found**
 ```
-apt upddate && apt install git && git clone https://github.com/Nkwenti-Severian-Ndongtsop/Automated_Backup_Recovery.git
+apt update && apt install git -y && git clone https://github.com/Nkwenti-Severian-Ndongtsop/Automated_Backup_Recovery.git
+```
+you can ceate a directory or sub-directories to contain your mock data_files\
+and clone the repository below that contains mock data\
+```
+git clone https://github.com/Nkwenti-Severian-Ndongtsop/mock_data.git
 ```
 
 Excellent!
 
-Now cd into the directory\
-Assuming you have mocked data_files in a directory somewhere in your container, you can execute the **back_up.sh** and then **recovery.sh**\
+Now cd into the Automated_Backup_Recovery directory\
+run this to make the scripts executable
+```chmod +x back_up.sh && chmod +x recover.sh
+```
+you can execute the **back_up.sh** and then **recover.sh**\
 You can check the logs after each execution\
+the backup_folder is found in the /home/ubuntu/backup_folder\
 feel free to play around.
 
 Finally you can set a cronjob for the script provided you don't stop your ubuntu instance and the container.
