@@ -12,7 +12,7 @@ To achieve this successfully, you need the following :
 
 You can install your multipass and run an instance using
 ```sh
-sudo snap install multipass && multipass launch docker --name ubuntu
+sudo apt update && sudo apt install snapd && sudo snap install multipass && multipass launch docker --name ubuntu
 ```
 
 Now you need to alias **"mulltipass exec ubuntu -- docker"** to **"docker"** in you shell configuration file.\
