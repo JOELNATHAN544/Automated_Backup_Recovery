@@ -1,30 +1,52 @@
 #!/bin/bash
 
-# check if the directory exists
-if [ ! -d "$1" ]; then
-    echo "Error: Directory '$1' does not exist."
+# Prompt the user to enter the absolute path of the directory
+echo "Enter the absolute path of the directory: " 
+read directory
+
+
+
+# Check if the directory exists
+if [ ! -d "$directory" ]; then
+    echo "Error: Directory '$directory' does not exist."
     exit 1
 fi
 
-# archive the directory
-archive="$1.tar"
-tar -cvf "$archive" "$1/"
+# Find the directory and store it
+mock_files=$(find "$directory" -type f)
 
-# compress the archive
-gzip "$archive"
+# Check if any mock files exist
+if [ -z "$mock_files" ]; then
+    echo "No mock files found in the directory '$directory'."
+    exit 1
+fi
 
-# create the backup directory if it doesn't exist
-backup="backup_folder"
+# Create the backup directory if it doesn't exist
+backup="/home/ubuntu/backup_folder"
 if [ ! -d "$backup" ]; then
     mkdir -p "$backup"
 fi
 
-# move the compressed archive to the backup directory
+# Archive the mock files
+archive="$directory.tar"
+tar -cvf "$archive" -C "$directory" .
+
+# Compress the archive
+gzip "$archive"
+
+# Move the compressed archive to the backup directory
 mv "$archive.gz" "$backup"
 
-# store the log in a file
+# Store the log in a file
 log="$backup/backup.log"
-echo "Backup of directory $1 completed at $(date)" >>"$log"
+echo "Backup of directory $directory completed at $(date)" >>"$log"
 
-# log the directory name to file1.txt
-echo "$1" >file1.txt
+# Log the directory name to file1.txt
+
+# Check if the backup was successful
+if [ $? -eq 0 ]; then
+echo "$directory" >file1.txt
+echo "Backup completed successfully!"
+else
+    echo "Backup failed."
+fi
