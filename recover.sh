@@ -1,27 +1,17 @@
 #!/bin/bash
 
-# cat and store the content of file1.txt
+#check if the file is empty
+if [ -z $content ]; then
 content=$(cat file1.txt)
-
-# check if the content is empty
-if [ -z "$content" ]; then
-    echo "No backup found"
-    exit 1
 fi
 
-# define the backup file path
-backup_file="backup_folder/$content.tar.gz"
-
-# check if the backup file exists
-if [ ! -f "$backup_file" ]; then
-    echo "Backup file '$backup_file' does not exist."
-    exit 1
-fi
-
-# extract the backup file
+# Extract the compressed file
+path=$(echo $content | cut -d '/' -f 1-3)
+end=$(basename "$content")
+compress=$(find "$path/backup_folder/${end}.tar.gz" -type f)
 mkdir -p "$content"
-tar -xzvf "$backup_file" -C "$content"
+tar -xzvf "$compress" -C "$content"
 
-# store the log in a file
-log_file="backup_folder/backup.log"
-echo "recovery of directory $content completed at $(date)" >> "$log_file"
+# Store the log in a file
+log_file="/home/ubuntu/backup_folder/backup.log"
+echo "Recovery of directory $content completed at $(date)" >>"$log_file"
